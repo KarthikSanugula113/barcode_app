@@ -4,7 +4,7 @@ from vercel_wsgi import handle_request
 app = Flask(__name__, template_folder="../templates")
 
 def handler(request):
-    return handle_request(app, request)
+    return app
 
 @app.route("/", methods=["GET", "POST"])
 def home():
