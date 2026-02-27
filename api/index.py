@@ -1,10 +1,11 @@
-from flask import Flask
-from vercel_wsgi import handle_request
+from flask import Flask, render_template, request, send_file
+import barcode
+from barcode.writer import ImageWriter
+from io import BytesIO
+import random
+import os
 
-app = Flask(__name__, template_folder="../templates")
-
-def handler(request):
-    return app
+app = Flask(__name__, template_folder=os.path.join(os.path.dirname(__file__), "../templates"))
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -29,4 +30,5 @@ def home():
 
     return render_template("index.html")
 
-# Required for Vercel
+# ✅ IMPORTANT: nothing else below
+app.debug = False
