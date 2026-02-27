@@ -13,11 +13,12 @@ def home():
         price = request.form.get("price")
 
         if price:
-            euro_part = int(float(price))
-            price_block = str(euro_part).zfill(4)
-            random_part = str(random.randint(10**15, 10**16-1))
+            # Convert to cents
+            price_in_cents = int(round(float(price) * 100))
+            price_block = str(price_in_cents).zfill(6)
 
-            final_string = "ADR" + price_block + random_part
+            # No random part (stable barcode)
+            final_string = "ADR" + price_block
 
             CODE128 = barcode.get_barcode_class("code128")
             my_barcode = CODE128(final_string, writer=ImageWriter())
@@ -29,6 +30,7 @@ def home():
             return send_file(buffer, mimetype="image/png")
 
     return render_template("index.html")
+
 
 # ✅ IMPORTANT: nothing else below
 app.debug = False
