@@ -14,7 +14,7 @@ def home():
 
         if price:
             # Convert to cents
-            price_in_cents = int(round(float(price) * 1000))
+            price_in_cents = int(round(float(price) * 100))
             price_block = str(price_in_cents).zfill(4)
 
             # No random part (stable barcode)
