@@ -14,8 +14,8 @@ def home():
 
         if price:
             # Convert to cents
-            price_in_cents = int(round(float(price) * 10))
-            price_block = str(price_in_cents).zfill(6)
+            price_in_cents = int(round(float(price) * 1000))
+            price_block = str(price_in_cents).zfill(4)
 
             # No random part (stable barcode)
             final_string = "ADR" + price_block
